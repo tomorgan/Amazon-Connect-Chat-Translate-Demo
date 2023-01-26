@@ -144,7 +144,7 @@ const Ccp = () => {
                     
                     //get the transcript and play it into the translate window
                     const transcript = await agentChatSession.getTranscript({
-                        maxResults: 100,
+                        maxResults: 1,
                         sortOrder: "ASCENDING"                        
                     });
                     const { InitialContactId, NextToken, Transcript } = transcript.data;
