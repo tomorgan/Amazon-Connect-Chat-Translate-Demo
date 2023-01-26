@@ -147,7 +147,7 @@ const Ccp = () => {
                         maxResults: 100,
                         sortOrder: "ASCENDING"                        
                     });
-                    const { InitialContactId, NextToken, Transcript } = awsSdkResponse.data;
+                    const { InitialContactId, NextToken, Transcript } = transcript.data;
                     Transcript.forEach(messageData => {
                         processChatText(messageData.data.Content, messageData.data.Type, messageData.data.ContactId );
                     });
