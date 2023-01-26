@@ -140,6 +140,7 @@ const Ccp = () => {
                     setCurrentContactId(contact.contactId);
                     const cnn = contact.getConnections().find(cnn => cnn.getType() === window.connect.ConnectionType.AGENT);
                     const agentChatSession = await cnn.getMediaController();
+                    setAgentChatSessionState(agentChatSessionState => [...agentChatSessionState, {[contact.contactId] : agentChatSession}])
                     getEvents(contact, agentChatSession);
                 });
 
