@@ -87,7 +87,7 @@ const Chatroom = (props) => {
         setNewMessage("");
 
         
-        
+        console.log("Getting session for ID: " + currentContactId[0]);
         const session = retrieveValue(currentContactId[0]);
     
         console.log("Value of session follows:");
