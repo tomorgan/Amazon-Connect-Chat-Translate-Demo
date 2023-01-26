@@ -149,7 +149,7 @@ const Ccp = () => {
                     });
                     const { InitialContactId, NextToken, Transcript } = transcript.data;
                     Transcript.forEach(messageData => {
-                        processChatText(messageData.data.Content, messageData.data.Type, messageData.data.ContactId );
+                        processChatText(messageData.Content, messageData.Type, messageData.ContactId );
                     });
                     
                     
