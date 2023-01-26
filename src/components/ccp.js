@@ -141,6 +141,18 @@ const Ccp = () => {
                     const cnn = contact.getConnections().find(cnn => cnn.getType() === window.connect.ConnectionType.AGENT);
                     const agentChatSession = await cnn.getMediaController();
                     setAgentChatSessionState(agentChatSessionState => [...agentChatSessionState, {[contact.contactId] : agentChatSession}])
+                    
+                    //get the transcript and play it into the translate window
+                    const transcript = await cnn.getTranscript({
+                        maxResults: 100,
+                        sortOrder: "ASCENDING"                        
+                    });
+                    const { InitialContactId, NextToken, Transcript } = awsSdkResponse.data;
+                    Transcript.forEach(messageData => {
+                        processChatText(messageData.data.Content, messageData.data.Type, messageData.data.ContactId );
+                    });
+                    
+                    
                     getEvents(contact, agentChatSession);
                 });
 
