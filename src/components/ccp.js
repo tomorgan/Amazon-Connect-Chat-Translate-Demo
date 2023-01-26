@@ -143,7 +143,7 @@ const Ccp = () => {
                     setAgentChatSessionState(agentChatSessionState => [...agentChatSessionState, {[contact.contactId] : agentChatSession}])
                     
                     //get the transcript and play it into the translate window
-                    const transcript = await cnn.getTranscript({
+                    const transcript = await agentChatSession.getTranscript({
                         maxResults: 100,
                         sortOrder: "ASCENDING"                        
                     });
