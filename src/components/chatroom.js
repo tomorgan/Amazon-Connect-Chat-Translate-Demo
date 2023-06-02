@@ -57,6 +57,9 @@ const Chatroom = (props) => {
             return;
         }
         let destLang = languageTranslate.find(o => o.contactId === currentContactId[0]);
+        
+       if (currentContactId[0] != null) { console.log("currentContactId zero item is: " + currentContactId[0]) } else { console.log("currentContactID[0] IS NULL.")}
+        
 
         // translate the agent message  ** Swap the below two round if you wnat to test custom termonologies **
         // let translatedMessage = await translateText(newMessage, 'en', destLang.lang);
@@ -84,8 +87,11 @@ const Chatroom = (props) => {
         setNewMessage("");
 
         
-        
+        console.log("Getting session for ID: " + currentContactId[0]);
         const session = retrieveValue(currentContactId[0]);
+    
+        console.log("Value of session follows:");
+    console.log(session);
 
         function retrieveValue(key){
             var value = "";

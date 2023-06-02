@@ -137,8 +137,22 @@ const Ccp = () => {
                 // This is invoked when the customer and agent are connected
                 contact.onConnected(async() => {
                     console.log("CDEBUG ===> onConnected() >> contactId: ", contact.contactId);
+                    setCurrentContactId(contact.contactId);
                     const cnn = contact.getConnections().find(cnn => cnn.getType() === window.connect.ConnectionType.AGENT);
                     const agentChatSession = await cnn.getMediaController();
+                    setAgentChatSessionState(agentChatSessionState => [...agentChatSessionState, {[contact.contactId] : agentChatSession}])
+                    
+                    //get the transcript and play it into the translate window
+                    const transcript = await agentChatSession.getTranscript({
+                        maxResults: 1,
+                        sortOrder: "ASCENDING"                        
+                    });
+                    const { InitialContactId, NextToken, Transcript } = transcript.data;
+                    Transcript.forEach(messageData => {
+                        processChatText(messageData.Content, messageData.Type, cnn.contactId );
+                    });
+                    
+                    
                     getEvents(contact, agentChatSession);
                 });
 
